@@ -1,0 +1,111 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'liste des utilisateurs'" [icon]="'fa-table'">
+
+
+    </app-page-header>
+
+    <button (click)="open(content)" class="btn btn-primary" style="margin-top: 19px;">Ajouter un utilisateur</button>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3">
+                <!--<div class="card-header">-->
+                <!--Basic example-->
+                <!--</div>-->
+                <div class="card-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>CIN</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                            <!--<th></th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let user of listUsers">
+                            <th scope="row">{{user.id}}</th>
+                            <td>{{user.cin}}</td>
+                            <td>{{user.firstName}}</td>
+                            <td>{{user.lastNom}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn">
+                                    update
+                                </button>
+                                <button class="btn" (click)="deleteUser(user.id)">
+                                    delete
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Ajouter un utilisateur</h4>
+        <button (click)="d('Cross click')" aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="userForm" novalidate>
+
+            <fieldset class="form-group">
+                <label>Cin</label>
+                <input class="form-control"
+                       placeholder="Cin" formControlName="cin"
+                       [ngClass]="{'error-input': cin.invalid}">
+                <div *ngIf="cin.invalid">
+                    <small class="form-text text-muted danger"
+                           *ngIf="cin.errors.required">
+                        Ce champ est requis.
+                    </small>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label>Prénom</label>
+                <input class="form-control" placeholder="Prénom" formControlName="firstName" />
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label>Nom</label>
+                <input class="form-control" placeholder="Nom" formControlName="lastNom"/>
+            </fieldset>
+
+
+            <fieldset class="form-group">
+                <label>Email</label>
+                <input class="form-control" placeholder="Email" formControlName="email"
+                       [ngClass]="{'error-input': email.invalid}">
+                <div *ngIf="email.invalid">
+                    <small class="form-text text-muted danger"
+                           *ngIf="email.errors.required">
+                        Ce champ est requis.
+                    </small>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label>Password</label>
+                <input class="form-control" placeholder="Password" formControlName="password"/>
+            </fieldset>
+
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button (click)="addUser()" class="btn btn-secondary" type="button">Ajouter</button>
+        <button (click)="c('Close click')" class="btn btn-secondary" type="button">Annuler</button>
+    </div>
+</ng-template>
+
+

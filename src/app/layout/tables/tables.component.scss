@@ -1,0 +1,12 @@
+.error-input, ::ng-deep .error-ng-select .ng-select-container {
+    border-color: #ff586b;
+    outline: 0;
+
+    &:focus, &:active {
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, .25);
+    }
+}
+
+.required-input {
+    color: #ff586b
+}
