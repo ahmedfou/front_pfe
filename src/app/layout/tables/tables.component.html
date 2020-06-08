@@ -20,6 +20,8 @@
                             <th>Prénom</th>
                             <th>Nom</th>
                             <th>Email</th>
+                            <th>Role</th>
+                            <th>password</th>
                             <th>Action</th>
                             <!--<th></th>-->
                         </tr>
@@ -31,12 +33,14 @@
                             <td>{{user.firstName}}</td>
                             <td>{{user.lastNom}}</td>
                             <td>{{user.email}}</td>
+                            <td>{{user.role}}</td>
+                            <td>{{user.password}}</td>
                             <td>
-                                <button class="btn">
-                                    update
+                                <button style="background-color: #007bff" class="btn" (click)="getUserById(user.id, content)">
+                                    <i class="fa fa-edit" ></i>
                                 </button>
-                                <button class="btn" (click)="deleteUser(user.id)">
-                                    delete
+                                <button style="background-color: red" class="btn" (click)="deleteUser(user.id)">
+                                    <i class="fa fa-trash"></i>
                                 </button>
                             </td>
                         </tr>
@@ -73,7 +77,7 @@
 
             <fieldset class="form-group">
                 <label>Prénom</label>
-                <input class="form-control" placeholder="Prénom" formControlName="firstName" />
+                <input class="form-control" placeholder="Prénom" formControlName="firstName"/>
             </fieldset>
 
             <fieldset class="form-group">
@@ -89,6 +93,19 @@
                 <div *ngIf="email.invalid">
                     <small class="form-text text-muted danger"
                            *ngIf="email.errors.required">
+                        Ce champ est requis.
+                    </small>
+                </div>
+            </fieldset>
+
+
+            <fieldset class="form-group">
+                <label>Role</label>
+                <input class="form-control" placeholder="Role" formControlName="role"
+                       [ngClass]="{'error-input': role.invalid}">
+                <div *ngIf="role.invalid">
+                    <small class="form-text text-muted danger"
+                           *ngIf="role.errors.required">
                         Ce champ est requis.
                     </small>
                 </div>

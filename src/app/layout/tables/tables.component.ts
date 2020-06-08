@@ -14,6 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class TablesComponent implements OnInit {
 
     listUsers: User[] = [];
+    user: User;
     closeResult: string;
 
     userForm: FormGroup;
@@ -34,6 +35,10 @@ export class TablesComponent implements OnInit {
         return this.userForm.get('email');
     }
 
+    get role() {
+        return this.userForm.get('role');
+    }
+
     get password() {
         return this.userForm.get('password');
     }
@@ -42,12 +47,34 @@ export class TablesComponent implements OnInit {
     constructor(private userService: UserService, private modalService: NgbModal, private formBuilder: FormBuilder) {
     }
 
+    getUserById(id: number, content) {
+        this.userService.getUserById(id)
+            .subscribe((user: User) => {
+                this.user = user;
+                this.setUser();
+                this.open(content);
+            });
+    }
+
+
+    setUser() {
+        this.userForm.patchValue({
+            cin: this.user.cin,
+            firstName: this.user.firstName,
+            lastNom: this.user.lastNom,
+            email: this.user.email,
+            role: this.user.role,
+            password: this.user.password,
+        });
+    }
+
     ngOnInit() {
         this.userForm = this.formBuilder.group({
             cin: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]],
             firstName: ['', [Validators.required]],
             lastNom: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
+            role: ['', [Validators.required]],
             password: ['', [Validators.required]],
         });
 
@@ -65,16 +92,28 @@ export class TablesComponent implements OnInit {
         user.lastNom = this.lastNom.value;
         user.email = this.email.value;
         user.password = this.password.value;
+        user.role = this.role.value;
 
-        console.log(user);
+        if (this.user) {
+            user.id = this.user.id;
+            this.userService.updateUser(user)
+                .subscribe(() => {
+                    this.userService.getAllUser()
+                        .subscribe((users: User[]) => {
+                            this.listUsers = users;
+                        });
+                });
+        } else {
 
-        this.userService.ajouterUser(user)
-            .subscribe(() => {
-                this.userService.getAllUser()
-                    .subscribe((users: User[]) => {
-                        this.listUsers = users;
-                    });
-            });
+            this.userService.ajouterUser(user)
+                .subscribe(() => {
+                    this.userService.getAllUser()
+                        .subscribe((users: User[]) => {
+                            this.listUsers = users;
+                        });
+                });
+        }
+
     }
 
 

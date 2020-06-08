@@ -21,6 +21,14 @@ export class UserService {
         return this.http.post<User>('http://localhost:8080/users/createUser', user);
     }
 
+    getUserById(id: number): Observable<User> {
+        return this.http.get<User>('http://localhost:8080/users/getUserById/' + id);
+    }
+
+    updateUser(user: User): Observable<User> {
+        return this.http.put<User>('http://localhost:8080/users/updateUser', user);
+    }
+
     deleteUser(idUser: number): Observable<any> {
         return this.http.delete('http://localhost:8080/users/deleteUser/' + idUser);
     }
