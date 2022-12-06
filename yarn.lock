@@ -2836,8 +2836,8 @@ decamelize@^1.2.0:
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
 decode-uri-component@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
 
 deep-equal@^1.0.1:
   version "1.0.1"
@@ -8069,9 +8069,9 @@ typescript@3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.5.tgz#dae20114a7b4ff4bd642db9c8c699f2953e8bbdb"
 
-typescript@^3.6.5:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
+typescript@^3.7.5:
+  version "3.9.10"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
 
 uglify-js@^3.1.4:
   version "3.7.3"
